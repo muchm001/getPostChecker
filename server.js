@@ -1,35 +1,35 @@
-let express = require('express');
-let bodyParser = require('body-parser');
+var express = require('express');
+var bodyParser = require('body-parser');
 
-let app = express();
-let handlebars = require('express-handlebars').create({defaultLayout: 'main'});
+var app = express();
+var handlebars = require('express-handlebars').create({defaultLayout: 'main'});
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 4000);
+app.set('port', 45560);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res){
-    let qParams = [];
-    for (let p in req.query) {
+    var qParams = [];
+    for (var p in req.query) {
         qParams.push({'name': p, 'value': req.query[p]});
     }
-    let context = {};
+    var context = {};
     context.dataList = qParams;
     res.render('get', context);
 });
 
 app.post('/', function(req, res){
-    let qParams = [];
-    for (let p in req.query){
+    var qParams = [];
+    for (var p in req.query){
         qParams.push({'name': p, 'value': req.query[p]});
     }
-    let bParams = [];
-    for (let b in req.body) {
+    var bParams = [];
+    for (var b in req.body) {
         bParams.push({'name': b, 'value': req.body[b]});
     }
-    let context = {};
+    var context = {};
     context.queryList = qParams;
     context.bodyList = bParams;
     res.render('post', context);
@@ -47,5 +47,5 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(app.get('port'), function(){
-    console.log('Express started on port 55420');
+    console.log('Express started on port 45560');
 });
